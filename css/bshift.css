@@ -11,11 +11,12 @@
 	margin-top: 30px;
 }
 .update-nag { }
-.btn_save { display: inline;
+.btn_save { display: block;
 			border: 1px solid;
 			font-weight: 600;
-
 			position: absolute;
+			width: 30%;
+			right: 200px;
 			}
 .add_slide_btn {	margin-left: 20px;
 					border: 1px solid;
@@ -165,7 +166,7 @@ html {
 .gen-settings-form {
 	margin-bottom: 10px;
 }
-.much_hate div{
+.inner_prev div{
 	position: relative; 
 	top: 50%; 
 	transform: translateY(-50%);
@@ -181,4 +182,7 @@ html {
 }
 .btm {
 	width: 30px;
+}
+.inner_prev {
+	height: 100%;
 }

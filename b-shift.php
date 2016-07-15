@@ -245,7 +245,14 @@ function bshift_shortcode($atts) {
             <div id="<?php echo $post_id; ?>" class="bslide <?php echo $post_id .' '.$slides['effect'][$i] ?>" data-index = "<?php echo $slides['index'][$i]; ?>" data-speed="<?php echo $slides['delay'][$i]; ?>" data-effect="<?php echo $slides['effect'][$i]; ?>" style="background-image: url('<?php echo $slides['slide_upload'][$i]; ?>'); 
                 background-size:cover; width: <?php echo $slides['width'][$i]; echo $slides['width_metric'][$i]; ?>; height: 100%; background-position: 0, <?php echo $total_width; ?>;  ">
                 <div class="b-shift-content" style="color: #<?php echo $slides['color'][$i]; ?>">
+                    <button style="display: block; color: inherit;" type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button">Previous</button>
+                    <button style="display: block; color: inherit;" type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next" role="button">Next</button>
+                    <div class="option-a" style="float: <?php echo $slides['text_position'][$i]; ?>">
                     <?php echo html_entity_decode($slides['slide_content'][$i]); ?>
+                    </div>
+                    <div class="option-b" style="float: <?php echo $slides['image_position'][$i]; ?>; bottom: <?php $slides['position_bottom'][$i]; ?> %;">
+                        <img src="<?php echo $slides['image_upload'][$i]; ?>" id="inner-image" style="height: <?php echo $slides['image_height'][$i]; ?>px; display: <?php if($slides['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
+                    </div>
                 </div>
             </div>
             <?php } } ?>

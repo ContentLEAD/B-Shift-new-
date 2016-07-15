@@ -171,12 +171,13 @@
 										<textarea class="slide_input bshift-editor" name="slide_content[]"><?php echo $content; ?></textarea>
 									
 									<h4 style="display:inline">Image Height</h4>
-									<input type="text" name="image_height[]" class="slide_input ih" value="<?php echo $new_array['image_height'][$i]; ?>"></input></br>
+									<input type="text" name="image_height[]" class="slide_input ih" value="<?php echo $new_array['image_height'][$i]; ?>"></input>pixels</br>
 									<h4 style="display:inline">Image Position</h4>
 									<?php $selected_position = ($new_array['image_position'][$i])? $new_array['image_position'][$i] : 'none'; ?>
 										<select name="image_position[]" class="ip">
 											<option value="left" <?php if($selected_position == 'left'){echo("selected");}?>>Left</option>
 											<option value="right" <?php if($selected_position == 'right'){echo("selected");}?>>Right</option>
+											<option value="none" <?php if($selected_position == 'none'){echo("selected");}?>>Center</option>
 										</select></br>
 									<h4 style="display:inline">Text Position</h4>
 									<?php $selected_position = ($new_array['text_position'][$i])? $new_array['text_position'][$i] : 'none'; ?>
@@ -186,7 +187,7 @@
 											<option value="none" <?php if($selected_position == 'none'){echo("selected");}?>>Center</option>
 										</select></br>
 									<h4 style="display:inline">Image Bottom Adjustment</h4>
-									<input type="text" name="position_bottom[]" class="slide_input btm" value="<?php echo ($new_array['position_bottom'][$i])? $new_array['position_bottom'][$i] : 0;  ?>"></input></br>
+									<input type="text" name="position_bottom[]" class="slide_input btm" value="<?php echo ($new_array['position_bottom'][$i])? $new_array['position_bottom'][$i] : 0;  ?>"></input>%</br>
 									<input class="slide_input image_url" id="inner-image-url" name="image_upload[]" value="<?php echo $new_array['image_upload'][$i]; ?>" type="text"></input>
 									<input class="upload_image_button" value="Add Image" data-target="slide-button-preview" type="button"></input>
 									<h4>Content Color</h4><input type="text" class="jscolor slide_input" name="color[]" value=<?php echo $new_array['color'][$i];?>></br>
@@ -223,7 +224,7 @@
 										<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/delete-512.png" class="delete_slide" title="Delete this slide."/>
 										<!--<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/prev.png" class="b-preview" title="Preview this slide." />-->
 										<div class="slide-preview" >
-											<div style="color: #<?php echo $new_array['color'][$i]; ?>; background-image: url('<?php echo $new_array['slide_upload'][$i]; ?>'); background-position: 0; background-size:cover; width: <?php echo $new_array['width'][$i]; ?><?php echo $new_array['width_metric'][$i]; ?>; height: <?php echo get_post_meta($post_id,'Slider_Height',true); ?><?php echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>;">
+											<div style="color: #<?php echo $new_array['color'][$i]; ?>; background-image: url('<?php echo $new_array['slide_upload'][$i]; ?>'); background-position: 0; background-size:cover; width: <?php echo $new_array['width'][$i]; ?><?php echo $new_array['width_metric'][$i]; ?>; height: <?php echo get_post_meta($post_id,'Slider_Height',true); ?><?php echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>;padding: 0 5%;">
 												<span class="slide-nav-left" data-direction="left"></span>
                     							<span class="slide-nav-right" data-direction="right"></span>
 												<div style="position: relative; top: 50%; transform: translateY(-50%);">
@@ -233,8 +234,8 @@
 															 
 														?>
 													</div>
-													<div class="option-b" style="float: <?php echo $new_array['image_position'][$i]; ?>; bottom: <?php $new_array['position_bottom'][$i]; ?>">
-														<img src="<?php	echo $new_array['image_upload'][$i]; ?>" id="inner-image" height="<?php	echo $new_array['image_height'][$i]; ?>" width="auto" style="position: <?php echo $selected_position; ?>; "/>
+													<div class="option-b" style="float: <?php echo $new_array['image_position'][$i]; ?>; bottom: <?php $new_array['position_bottom'][$i]; ?> %;">
+														<img src="<?php	echo $new_array['image_upload'][$i]; ?>" id="inner-image" height="<?php	echo $new_array['image_height'][$i]; ?>" width="auto" style="display: <?php if($new_array['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
 													</div>	
 												</div>
 											</div>
@@ -246,8 +247,11 @@
 							</li>
 						<?php } ?>
 			<?php endif; ?>
+			<li style="display: inline-block; vertical-align: top;"><h2 class="slide_title"> + </h2> </li>
+			</ul>
 			<input type="hidden" name="save_slides" data-slide-staus="" />
 			<input type="submit" value="save/edit" class="btn_save"/>
+			
 		</form>
 		
 		

@@ -66,8 +66,9 @@ jQuery(document).ready(function($){
             inner_img_url=$('#inner-image-url').val();
             console.log('!!!!!!!!!'+inner_img_url);
             $('#inner-image').attr('src',inner_img_url);
+            img_url = $('#image_url').val();
             $('#inner-image').css('display','inline');
-            $('.much_hate').css({'background-image': 'url('+image_url+')', 'background-size': 'cover', 'background-position': '0px center'});
+            $('.inner_prev').css({'background-image': 'url('+img_url+')', 'background-size': 'cover', 'background-position': '0px center'});
             $('.btn_save').show();
         });
     });
