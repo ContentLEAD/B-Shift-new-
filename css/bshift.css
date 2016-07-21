@@ -11,12 +11,15 @@
 	margin-top: 30px;
 }
 .update-nag { }
-.btn_save { display: block;
+.btn_save { 
 			border: 1px solid;
 			font-weight: 600;
-			position: absolute;
+			position: relative;
 			width: 30%;
-			right: 200px;
+			top: -10px;
+			left: 5px;
+			background: #67C81D;
+			color: #FFF;
 			}
 .add_slide_btn {	margin-left: 20px;
 					border: 1px solid;
@@ -39,8 +42,7 @@
 			height: auto;
 			cursor: pointer;
 			position: relative;
-			top: -150px;
-			left: 120px;
+			float: left;
 
 }
 select.metric {				padding: 0;
@@ -63,10 +65,11 @@ select.metric {				padding: 0;
 
 }
 
-.col-md-3 {
+.toplevel_page_B-Shift .col-md-3 {
 
     border: 1px dotted;
 }
+
 .slide_input, .upload_image_button {
 	display: inline;
 	margin: 5px 0;
@@ -97,17 +100,13 @@ input.slide_input.image_url {
 	left: 150px;
 }
 .slide-preview {
-	position: relative;
 	z-index: 9;
 	text-align: center;
-	bottom: 750px;
-	width: 60%;
-	margin: 30px;
-	float: right;
+	width: 100%;
+	margin-top: 10px;
+	display: inline-block;
 }
-.slide-preview img {
-	//height: 100%;
-}
+
 
 .editor_width {
 	width: 150px;
@@ -148,7 +147,7 @@ html {
 .ib div.mce-panel, .b-current div.mce-panel {
 
 	width: 100%;
-	max-width: 300px;
+
 }
 #slides iframe {
 	height: 100px !important;
@@ -185,4 +184,30 @@ html {
 }
 .inner_prev {
 	height: 100%;
+}
+.bshift-admn-banner {
+	width: 90%;
+}
+.container {
+	max-width: 100%;
+}
+.bshift .col-md-3 input {
+	width: 110px;
+}
+.bshift-form-element {
+	float: left;
+	padding: 10px;
+	border: 2px solid;
+	height: 120px;
+	margin: 2px;
+	width: 200px;
+}
+.bshift-form-element input {
+	width: 90%;
+	margin-left: 3px;
+}
+.bshift-form-element select {
+	display: inline-block;
+	margin-top: 5%;
+	margin-left: 3px;
 }

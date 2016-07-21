@@ -3,7 +3,7 @@
 
                             var _this = jQuery('.b-active');
                             var new_outer_height = _this.height();
-                            console.log('Height: '+new_outer_height);
+                            //console.log('Height: '+new_outer_height);
                             var new_inner_height = _this.find('.b-shift-content').height();
                             var new_adjust = (new_outer_height/2) - (new_inner_height/2);
                             var span_left_height = _this.find('.slide-nav-left').outerHeight();
@@ -21,7 +21,7 @@
                     getInfoalt: function(){
                         
                         var s = new Array();
-                        console.log(this);
+                        //console.log(this);
                         this.each( function(index) {
                             
                             s.push({
@@ -163,15 +163,16 @@
                             var cp_parent_prev = jQuery(cp_parent).prev();
                             var cp_parent_next = jQuery(cp_parent).next();
                         }
-                        jQuery(cp_parent).toggle();
+                        console.log(cp_parent.parentElement);
+                        jQuery(cp_parent).fadeOut();
                         if(dir =="left") { 
                             jQuery(cp_parent_prev).bheight();                  
-                            jQuery(cp_parent_prev).toggle('fast');
+                            jQuery(cp_parent_prev).fadeIn('fast');
                             --current_slides_index;
                         }
                         else {
                             jQuery(cp_parent_next).bheight();
-                            jQuery(cp_parent_next).toggle('fast');
+                            jQuery(cp_parent_next).fadeIn('fast');
                             ++current_slides_index;
                             //console.log(current_slides_index);
                         }
@@ -192,10 +193,10 @@
         jQuery.fn.extend(
                 {
                     bshift: function(index){                        
-                        console.log(index);
+                        //console.log(index);
                         window.addEventListener("resize", sliderResize);   
                         info = this.getInfoalt();
-                        console.log(info);  
+                        //console.log(info);  
                         jQuery(info).banimate(index);                       
                     }
                 }

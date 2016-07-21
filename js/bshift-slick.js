@@ -1,5 +1,17 @@
 jQuery(document).ready(function($) {
            
+           $(document).on('button-color', function() {
+            var button = $('button');
+            var content_color = $('.b-shift-content').css('color');
+            console.log(content_color);
+            $('button').attr('color', content_color);
+           });
+
+           $('button').click(function() {
+              var content_color = $('.b-shift-content').css('color');
+              
+           })
+
            $('.b-shift-content').css('text-align', 'center');
            
            var arrow = $('.left-bframe').attr('data-pid');
@@ -31,16 +43,15 @@ jQuery(document).ready(function($) {
           'id': qid
           };
         $.post(ajaxurl, data, function(response) {
-            $()
             //console.log(JSON.parse(response));
             var reta = JSON.parse(response);
             speed = reta.did;
             $('.left-bframe').slick({
                           slidesToShow: 1,
                           slidesToScroll: 1,
-                          autoplay: false,
+                          autoplay: false,                          
                           arrows: true,
-                          rtl: false,
+                          //appendArrows: $(".b-shift-content"), 
                           autoplaySpeed: speed                                
            });
         });
@@ -49,6 +60,7 @@ jQuery(document).ready(function($) {
             
 
             var arrow = $('.left-bframe').attr('data-pid');
+
            
            //console.log(button_array[0]);
            
@@ -65,6 +77,7 @@ jQuery(document).ready(function($) {
                   console.log(j_array['colors'][0]);
                   var ind = $('.slick-current').attr('data-index');
                   var color = '#'+response[ind];
+                  console.log(color);
                   $('.slick-arrow').css('color','#'+j_array['colors'][ind]);
                   //console.log(ind);
               });

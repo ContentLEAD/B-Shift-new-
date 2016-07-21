@@ -18,6 +18,13 @@
   right: 0px;
 
 }
+
+.left-bframe .slick-arrow {
+
+
+
+}
+
 .left-bframe .slick-prev::before, .left-bframe .slick-next::before {
 
 }
@@ -111,6 +118,19 @@
   top: 40%;
   transform: translateY(-50%);
 }
+
+.slick-track .b-shift-content {
+    padding: 0 5%;
+
+}
+.slick-track .b-shift-content button {
+  color: inherit !important;
+}
+
+.option-a h2, .option-a h3, .option-a h1, .option-a p {
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   /* line 87, sass/new_sass.scss */
   .b-frame {

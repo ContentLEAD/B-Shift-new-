@@ -8,13 +8,15 @@
     Author URI: http://www.brafton.com
     */
 
+
+
 function b_shift_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('jquery-ui','https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',array());
-    wp_enqueue_script('bshift-js',plugin_dir_url(__FILE__).'js/bshift.js', array());
-    wp_enqueue_script('slick',plugin_dir_url(__FILE__).'slick/slick.min.js', array());
+    wp_enqueue_script('bshift-js',plugin_dir_url(__FILE__).'js/bshift.js', array(), NULL);
+    wp_enqueue_script('slick',plugin_dir_url(__FILE__).'slick/slick.js', array(), NULL);
     wp_enqueue_style('jquery-ui','//code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css');
-    wp_enqueue_script('bshift-slick',plugin_dir_url(__FILE__).'js/bshift-slick.js', array());
+    wp_enqueue_script('bshift-slick',plugin_dir_url(__FILE__).'js/bshift-slick.js', array(), NULL);
     wp_enqueue_style('sass',plugin_dir_url(__FILE__).'css/new_sass.css', array());
     wp_enqueue_style('slick-theme',plugin_dir_url(__FILE__).'slick/slick-theme.css', array());
     wp_enqueue_style('slick',plugin_dir_url(__FILE__).'slick/slick.css', array());
@@ -133,6 +135,7 @@ function create_slider() {
             $bgcolor=$_POST['bgcolor'];
             $height_metric=$_POST['height_metric'];
             $width_metric=$_POST['width_metric'];
+            $autoplay =$_POST['autoplay'];
 		    $vars = array(
     			'post_type'=>'b-shift-slider',
     			'post_title'=> $title,
@@ -150,6 +153,7 @@ function create_slider() {
         add_post_meta($post,'Slider_Width',$width);
         add_post_meta($post,'Slider_Effect',$effect);
         add_post_meta($post,'Slider_Bgcolor',$bgcolor);
+        add_post_meta($post,'Slider_Play',$autoplay);
         add_post_meta($post,'Slider_Width_Metric',$width_metric);
 
 }
@@ -245,8 +249,8 @@ function bshift_shortcode($atts) {
             <div id="<?php echo $post_id; ?>" class="bslide <?php echo $post_id .' '.$slides['effect'][$i] ?>" data-index = "<?php echo $slides['index'][$i]; ?>" data-speed="<?php echo $slides['delay'][$i]; ?>" data-effect="<?php echo $slides['effect'][$i]; ?>" style="background-image: url('<?php echo $slides['slide_upload'][$i]; ?>'); 
                 background-size:cover; width: <?php echo $slides['width'][$i]; echo $slides['width_metric'][$i]; ?>; height: 100%; background-position: 0, <?php echo $total_width; ?>;  ">
                 <div class="b-shift-content" style="color: #<?php echo $slides['color'][$i]; ?>">
-                    <button style="display: block; color: inherit;" type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button">Previous</button>
-                    <button style="display: block; color: inherit;" type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next" role="button">Next</button>
+                    <!--<button style="display: block; color: inherit;" type="button" data-role="none" class="slick-prev slick-arrow" aria-label="Previous" role="button">Previous</button>
+                    <button style="display: block; color: inherit;" type="button" data-role="none" class="slick-next slick-arrow" aria-label="Next" role="button">Next</button>-->
                     <div class="option-a" style="float: <?php echo $slides['text_position'][$i]; ?>">
                     <?php echo html_entity_decode($slides['slide_content'][$i]); ?>
                     </div>

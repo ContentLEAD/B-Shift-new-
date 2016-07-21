@@ -87,9 +87,10 @@
 
  ?>
 
-	<div class="container">
+	<div class="container bshift">
+		<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/banner_brafton.jpg" class="bshift-admn-banner">
 		<form action=" " class="row gen-settings-form" method="post">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<h4>TITLE</h4>
 				<input type="text" name="title" value="<?php echo get_post_meta($post_id,'Slider_Name',true); ?>"></input></br>
 				<h4>HEIGHT</h4>
@@ -101,11 +102,8 @@
 					<option value="px" <?php if($selected_metric == 'px'){echo("selected");}?>>Pixels</option>
 					<option value="%" <?php if($selected_metric == '%'){echo("selected");}?>>Percent</option>
 				</select></br>
-				<h4>Background Color</h4><input type="text" class="jscolor" name="bgcolor" value="<?php echo get_post_meta($post_id,'Slider_Bgcolor',true); ?>"></br>
-				<input type="hidden" name="update"></input>
-				<input type="hidden" name="slider_id" value="<?php echo $post_id; ?>">
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<h4>DELAY</h4>
 				<input type="text" name="delay" value="<?php echo get_post_meta($post_id,'Slider_Delay',true); ?>"></input></br>
 				<h4>WIDTH</h4>
@@ -117,9 +115,8 @@
 					<option value="px" <?php if($selected_metric == 'px'){echo("selected");}?>>Pixels</option>
 					<option value="%" <?php if($selected_metric == '%'){echo("selected");}?>>Percent</option>
 				</select></br>
-				<input type="submit" value="update slider" class="update_slider"></input>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<h4>STATE</h4>
 				<?php $selected_state = get_post_meta($post_id,'Slider_State',true); ?>
 				<select name="state">
@@ -138,12 +135,20 @@
 					<option value="rotate" <?php if($selected_effect == 'rotate'){echo("selected");}?>>Invert</option>
 				</select>
 			</div>
+			<div class="col-md-3">
+				<h4>Background Color</h4><input type="text" class="jscolor" name="bgcolor" value="<?php echo get_post_meta($post_id,'Slider_Bgcolor',true); ?>"></br>
+				<input type="hidden" name="update"></input>
+				<h4>Autoplay True</h4>
+				<input type="radio" name="autoplay"></input></br>
+				<input type="submit" value="update slider" class="update_slider"></input>
+				<input type="hidden" name="slider_id" value="<?php echo $post_id; ?>">
+			</div>
 			
 		</form>
 
 	</div>
 	
-		<h3 class="add_slide_btn" id="new_slide" data-pid="<?php echo $post_id; ?>">Add Slide</h3>
+		<h3 class="add_slide_btn add_new_slide" id="new_slide" data-pid="<?php echo $post_id; ?>">Add Slide</h3>
 		<form action="admin.php?page=edit_slider&slider_id=<?php echo $post_id; ?>" method="post" id="slides" class="container <?php echo $post_id; ?>">
 			<input type="hidden" name="pid" value="<?php echo $post_id; ?>"></input>
 			<ul>
@@ -159,71 +164,7 @@
 							
 								<li style="display: inline-block; vertical-align: top;"><h2 class="<?php if($i==0) { echo 'slide_title engaged'; } else { echo 'slide_title';} ?>">Slide <?php echo $i+1; ?></h2>
 								<div class="<?php if($i==0) { echo 'ib show_slide'; } else { echo 'ib collapse';} ?>">
-									<h4>Content</h4>
-										<!--Slide editor is loaded here -->
-										<?php
-										$editor_id = 'slide_editor'.$i;
-										$settings = array( 'media_buttons' => false, 'textarea_name'=> 'slide_content[]','editor_height'=>'75px','editor_class'=>'bshift-editor','editor_css'=>'<style>.wp-editor-wrap{width: 255px;}</style>');
-										$content = ($new_array['slide_content'][$i])? $new_array['slide_content'][$i] : ' ';
-										//$box = wp_editor( $content, $editor_id, $settings);
-										
-										?>
-										<textarea class="slide_input bshift-editor" name="slide_content[]"><?php echo $content; ?></textarea>
-									
-									<h4 style="display:inline">Image Height</h4>
-									<input type="text" name="image_height[]" class="slide_input ih" value="<?php echo $new_array['image_height'][$i]; ?>"></input>pixels</br>
-									<h4 style="display:inline">Image Position</h4>
-									<?php $selected_position = ($new_array['image_position'][$i])? $new_array['image_position'][$i] : 'none'; ?>
-										<select name="image_position[]" class="ip">
-											<option value="left" <?php if($selected_position == 'left'){echo("selected");}?>>Left</option>
-											<option value="right" <?php if($selected_position == 'right'){echo("selected");}?>>Right</option>
-											<option value="none" <?php if($selected_position == 'none'){echo("selected");}?>>Center</option>
-										</select></br>
-									<h4 style="display:inline">Text Position</h4>
-									<?php $selected_position = ($new_array['text_position'][$i])? $new_array['text_position'][$i] : 'none'; ?>
-										<select name="text_position[]" class="tp">
-											<option value="left" <?php if($selected_position == 'left'){echo("selected");}?>>Left</option>
-											<option value="right" <?php if($selected_position == 'right'){echo("selected");}?>>Right</option>
-											<option value="none" <?php if($selected_position == 'none'){echo("selected");}?>>Center</option>
-										</select></br>
-									<h4 style="display:inline">Image Bottom Adjustment</h4>
-									<input type="text" name="position_bottom[]" class="slide_input btm" value="<?php echo ($new_array['position_bottom'][$i])? $new_array['position_bottom'][$i] : 0;  ?>"></input>%</br>
-									<input class="slide_input image_url" id="inner-image-url" name="image_upload[]" value="<?php echo $new_array['image_upload'][$i]; ?>" type="text"></input>
-									<input class="upload_image_button" value="Add Image" data-target="slide-button-preview" type="button"></input>
-									<h4>Content Color</h4><input type="text" class="jscolor slide_input" name="color[]" value=<?php echo $new_array['color'][$i];?>></br>
-									<h4>Width</h4>
-										<input type="text" class="slide_input" name="width[]" value="<?php echo $new_array['width'][$i];?>"></input>
-										<?php $selected_metric = ($new_array['width_metric'][$i])? $new_array['width_metric'][$i] : get_post_meta($post_id,'Slider_Width_Metric',true); ?>
-										<select name="width_metric[]" class="<?php echo $selected_metric; ?> metric">
-											<option value="px" <?php if($selected_metric == 'px'){echo("selected");}?>>Pixels</option>
-											<option value="%" <?php if($selected_metric == '%'){echo("selected");}?>>Percent</option>
-										</select></br>
-									<!--<h4>Height</h4>
-										<input type="text" class="slide_input" name="height[]" value="<?php echo $new_array['height'][$i]; ?>"></input>
-										<?php $selected_metric = ($new_array['height_metric'][$i])? $new_array['height_metric'][$i] : get_post_meta($post_id,'Slider_Height_Metric',true); ?>
-										<select name="height_metric[]" class="<?php echo $selected_metric; ?> metric">
-											<option value="px" <?php if($selected_metric == 'px'){echo("selected");}?>>Pixels</option>
-											<option value="%" <?php if($selected_metric == '%'){echo("selected");}?>>Percent</option>
-										</select></br>-->
-									<h4>Delay</h4>
-										<input type="text" class="slide_input" name="delay[]" value="<?php echo $new_array['delay'][$i]; ?>"></input>
-									<h4>Effect</h4>
-										<?php $selected_effect = $new_array['effect'][$i]; ?>
-									<select name="effect[]" class="slide_input">
-										<option value="fader" <?php if($selected_effect == 'fader'){echo("selected");}?>>Fade</option>
-										<option value="slide_vertical" <?php if($selected_effect == 'slide_vertical'){echo("selected");}?>>Slide Vertical</option>
-										<option value="slide_left" <?php if($selected_effect == 'slide_left'){echo("selected");}?>>Slide Left</option>
-										<option value="slide_right" <?php if($selected_effect == 'slide_right'){echo("selected");}?>>Slide Right</option>
-										<option value="toggle" <?php if($selected_effect == 'toggle'){echo("selected");}?>>Standard Toggle</option>
-										<option value="rotate" <?php if($selected_effect == 'rotate'){echo("selected");}?>>Invert</option>
-									</select>
-									<h4>Index</h4>
-										<input type="text" class="slide_input" name="index[]" value="<?php echo $i; ?>"></input>
-										<input class="slide_input image_url" name="slide_upload[]" value="<?php echo $new_array['slide_upload'][$i]; ?>" type="text"></input>
-										<input class="upload_image_button" value="Add Background" data-target="slide-button-preview" type="button"></input>
-										<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/delete-512.png" class="delete_slide" title="Delete this slide."/>
-										<!--<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/prev.png" class="b-preview" title="Preview this slide." />-->
-										<div class="slide-preview" >
+									<div class="slide-preview" >
 											<div style="color: #<?php echo $new_array['color'][$i]; ?>; background-image: url('<?php echo $new_array['slide_upload'][$i]; ?>'); background-position: 0; background-size:cover; width: <?php echo $new_array['width'][$i]; ?><?php echo $new_array['width_metric'][$i]; ?>; height: <?php echo get_post_meta($post_id,'Slider_Height',true); ?><?php echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>;padding: 0 5%;">
 												<span class="slide-nav-left" data-direction="left"></span>
                     							<span class="slide-nav-right" data-direction="right"></span>
@@ -240,6 +181,92 @@
 												</div>
 											</div>
 										</div>
+									<h4>Content</h4>
+										<!--Slide editor is loaded here -->
+										<?php
+										$editor_id = 'slide_editor'.$i;
+										$settings = array( 'media_buttons' => false, 'textarea_name'=> 'slide_content[]','editor_height'=>'75px','editor_class'=>'bshift-editor','editor_css'=>'<style>.wp-editor-wrap{width: 255px;}</style>');
+										$content = ($new_array['slide_content'][$i])? $new_array['slide_content'][$i] : ' ';
+										//$box = wp_editor( $content, $editor_id, $settings);
+										
+										?>
+										<textarea class="slide_input bshift-editor" name="slide_content[]"><?php echo $content; ?></textarea>
+									<div class="bshift-form-element">
+									<h4>Image Height</h4>
+									<input type="text" name="image_height[]" class="slide_input ih" value="<?php echo $new_array['image_height'][$i]; ?>"></input>pixels</br>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Image Position</h4>
+									<?php $selected_position = ($new_array['image_position'][$i])? $new_array['image_position'][$i] : 'none'; ?>
+										<select name="image_position[]" class="ip">
+											<option value="left" <?php if($selected_position == 'left'){echo("selected");}?>>Left</option>
+											<option value="right" <?php if($selected_position == 'right'){echo("selected");}?>>Right</option>
+											<option value="none" <?php if($selected_position == 'none'){echo("selected");}?>>Center</option>
+										</select></br>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Text Position</h4>
+									<?php $selected_position = ($new_array['text_position'][$i])? $new_array['text_position'][$i] : 'none'; ?>
+										<select name="text_position[]" class="tp">
+											<option value="left" <?php if($selected_position == 'left'){echo("selected");}?>>Left</option>
+											<option value="right" <?php if($selected_position == 'right'){echo("selected");}?>>Right</option>
+											<option value="none" <?php if($selected_position == 'none'){echo("selected");}?>>Center</option>
+										</select></br>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Image Bottom Adjustment</h4>
+									<input type="text" name="position_bottom[]" class="slide_input btm" value="<?php echo ($new_array['position_bottom'][$i])? $new_array['position_bottom'][$i] : 0;  ?>"></input>%</br>
+									</div>
+									<div class="bshift-form-element">
+									<input class="slide_input image_url" id="inner-image-url" name="image_upload[]" value="<?php echo $new_array['image_upload'][$i]; ?>" type="text"></input>
+									<input class="upload_image_button" value="Add Image" data-target="slide-button-preview" type="button"></input>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Content Color</h4><input type="text" class="jscolor slide_input" name="color[]" value=<?php echo $new_array['color'][$i];?>></br>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Width</h4>
+										<input type="text" id="slide_width" class="slide_input" name="width[]" value="<?php echo $new_array['width'][$i];?>"></input>
+										<?php $selected_metric = ($new_array['width_metric'][$i])? $new_array['width_metric'][$i] : get_post_meta($post_id,'Slider_Width_Metric',true); ?>
+										<select name="width_metric[]" class="<?php echo $selected_metric; ?> metric">
+											<option value="px" <?php if($selected_metric == 'px'){echo("selected");}?>>Pixels</option>
+											<option value="%" <?php if($selected_metric == '%'){echo("selected");}?>>Percent</option>
+										</select></br>
+									</div>
+									<!--<h4>Height</h4>
+										<input type="text" class="slide_input" name="height[]" value="<?php echo $new_array['height'][$i]; ?>"></input>
+										<?php $selected_metric = ($new_array['height_metric'][$i])? $new_array['height_metric'][$i] : get_post_meta($post_id,'Slider_Height_Metric',true); ?>
+										<select name="height_metric[]" class="<?php echo $selected_metric; ?> metric">
+											<option value="px" <?php if($selected_metric == 'px'){echo("selected");}?>>Pixels</option>
+											<option value="%" <?php if($selected_metric == '%'){echo("selected");}?>>Percent</option>
+										</select></br>-->
+									<div class="bshift-form-element">
+									<h4>Delay</h4>
+										<input type="text" class="slide_input" name="delay[]" value="<?php echo $new_array['delay'][$i]; ?>"></input>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Effect</h4>
+										<?php $selected_effect = $new_array['effect'][$i]; ?>
+									<select name="effect[]" class="slide_input">
+										<option value="fader" <?php if($selected_effect == 'fader'){echo("selected");}?>>Fade</option>
+										<option value="slide_vertical" <?php if($selected_effect == 'slide_vertical'){echo("selected");}?>>Slide Vertical</option>
+										<option value="slide_left" <?php if($selected_effect == 'slide_left'){echo("selected");}?>>Slide Left</option>
+										<option value="slide_right" <?php if($selected_effect == 'slide_right'){echo("selected");}?>>Slide Right</option>
+										<option value="toggle" <?php if($selected_effect == 'toggle'){echo("selected");}?>>Standard Toggle</option>
+										<option value="rotate" <?php if($selected_effect == 'rotate'){echo("selected");}?>>Invert</option>
+									</select>
+									</div>
+									<div class="bshift-form-element">
+									<h4>Index</h4>
+										<input type="text" class="slide_input" name="index[]" value="<?php echo $i; ?>"></input>
+									</div>
+									<div class="bshift-form-element">
+										<input class="slide_input image_url" name="slide_upload[]" value="<?php echo $new_array['slide_upload'][$i]; ?>" type="text"></input>
+										<input class="upload_image_button" value="Add Background" data-target="slide-button-preview" type="button"></input>
+									</div>
+										<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/delete-512.png" class="delete_slide" title="Delete this slide."/>
+										<!--<img src="<?php echo plugin_dir_url(__FILE__); ?>/img/prev.png" class="b-preview" title="Preview this slide." />-->
+										
 										<!--<input type="submit" name="delete[]" value="delete slide" data-ref="<?php echo $i; ?>" class="delete_slide"></input>-->
 										<input type="hidden" name="counter[]"></input>
 										
@@ -247,7 +274,7 @@
 							</li>
 						<?php } ?>
 			<?php endif; ?>
-			<li style="display: inline-block; vertical-align: top;"><h2 class="slide_title"> + </h2> </li>
+			<li style="display: inline-block; vertical-align: top;"><h2 class="slide_title add_new_slide"> + </h2> </li>
 			</ul>
 			<input type="hidden" name="save_slides" data-slide-staus="" />
 			<input type="submit" value="save/edit" class="btn_save"/>

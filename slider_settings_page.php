@@ -31,6 +31,8 @@
 		<option value="toggle">Standard Toggle</option>
 		<option value="rotate">Invert</option>
 	</select></br>
+	<h4 style="display:inline-block;">Autoplay True</h4>
+	<input type="radio" name="autoplay"></input>
 	<input type="hidden" name="add_new_slider" value="1"></br>
 	<input type="submit" name="" value="Create"></br>
 </form>

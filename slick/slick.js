@@ -38,21 +38,21 @@
             var _ = this, dataSettings;
 
             _.defaults = {
-                accessibility: true,
-                adaptiveHeight: false,
+                accessibility: false,
+                adaptiveHeight: true,
                 appendArrows: $(element),
                 appendDots: $(element),
                 arrows: true,
                 asNavFor: null,
-                prevArrow: '<button style="display: none !important;" type="button" data-role="none" class="slick-prev" aria-label="Previous" tabindex="0" role="button">Previous</button>',
-                nextArrow: '<button style="display: none !important;" type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>',
+                prevArrow: '<button type="button" data-role="none" class="slick-prev" aria-label="Previous" tabindex="0" role="button">Previous</button>',
+                nextArrow: '<button type="button" data-role="none" class="slick-next" aria-label="Next" tabindex="0" role="button">Next</button>',
                 autoplay: false,
                 autoplaySpeed: 3000,
                 centerMode: false,
                 centerPadding: '50px',
                 cssEase: 'ease',
                 customPaging: function(slider, i) {
-                    return $('<button style="display: none !important;" type="button" data-role="none" role="button" tabindex="0" />').text(i + 1);
+                    return $('<button type="button" data-role="none" role="button" tabindex="0" />').text(i + 1);
                 },
                 dots: false,
                 dotsClass: 'slick-dots',
@@ -493,7 +493,7 @@
 
             _.$dots = dot.appendTo(_.options.appendDots);
 
-            _.$dots.find('li').first().addClass('slick-active').attr('aria-hidden', 'false');
+            _.$dots.find('li').first().addClass('slick-active').trigger('button-color').attr('aria-hidden', 'false');
 
         }
 
@@ -820,7 +820,7 @@
     };
 
     Slick.prototype.clickHandler = function(event) {
-
+        console.log(event);
         var _ = this;
 
         if (_.shouldClick === false) {
@@ -2197,8 +2197,7 @@
 
                     _.$slides
                         .slice(index - centerOffset, index + centerOffset + 1)
-                        .addClass('slick-active')
-                        .attr('aria-hidden', 'false');
+                        .addClass('slick-active').trigger('button-color').attr('aria-hidden', 'false');
 
                 } else {
 
@@ -2206,6 +2205,7 @@
                     allSlides
                         .slice(indexOffset - centerOffset + 1, indexOffset + centerOffset + 2)
                         .addClass('slick-active')
+                        .trigger('button-color')
                         .attr('aria-hidden', 'false');
 
                 }
@@ -2237,12 +2237,14 @@
                 _.$slides
                     .slice(index, index + _.options.slidesToShow)
                     .addClass('slick-active')
+                    .trigger('button-color')
                     .attr('aria-hidden', 'false');
 
             } else if (allSlides.length <= _.options.slidesToShow) {
 
                 allSlides
                     .addClass('slick-active')
+                    .trigger('button-color')
                     .attr('aria-hidden', 'false');
 
             } else {
@@ -2255,6 +2257,7 @@
                     allSlides
                         .slice(indexOffset - (_.options.slidesToShow - remainder), indexOffset + remainder)
                         .addClass('slick-active')
+                        .trigger('button-color')
                         .attr('aria-hidden', 'false');
 
                 } else {
@@ -2262,6 +2265,7 @@
                     allSlides
                         .slice(indexOffset, indexOffset + _.options.slidesToShow)
                         .addClass('slick-active')
+                        .trigger('button-color')
                         .attr('aria-hidden', 'false');
 
                 }
@@ -2846,6 +2850,7 @@
                 .find('li')
                 .eq(Math.floor(_.currentSlide / _.options.slidesToScroll))
                 .addClass('slick-active')
+                .trigger('button-color')
                 .attr('aria-hidden', 'false');
 
         }

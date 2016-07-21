@@ -5,6 +5,7 @@
 ?>
 
 <div class="wrap">
+ <img src="<?php echo plugin_dir_url(__FILE__); ?>/img/banner_brafton.jpg" class="bshift-admn-banner">
  <h2>Create New B-Shift Slider</h2>
     
         <p><a href="<?php echo get_site_url(); ?>/wp-admin/admin.php?page=slider_settings_page" style="border: 1px solid;

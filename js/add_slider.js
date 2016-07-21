@@ -1,5 +1,13 @@
 jQuery(document).ready(function($){
 
+    var button_color = $('.b-shift-content').attr('color');
+    $('.slick-arrow').attr('color', button_color);
+
+    $('.slick-arrow').mouseover(function() {
+        var button_color = $('.slick-active .b-shift-content').attr('color');
+        $('.slick-arrow').attr('color', button_color);
+    })
+
     function tinyMce_init(_mode) {
 
             tinyMCE.init({ 
@@ -61,6 +69,15 @@ jQuery(document).ready(function($){
         } else {
             $('.option-b').css({'float': image_position, 'transform': "translateY(-50%)" });
         }
+   });
+
+   $('#slide_width').keyup(function() {
+
+        var prev_width = $(this).val();
+        var metric = $(this).next().val();
+        console.log(metric);
+        var new_width = prev_width + metric;
+        $('.slide-preview div').css('width', new_width);
    });
 
     $('.jscolor').on('blur', function() {
@@ -147,7 +164,7 @@ jQuery(document).ready(function($){
         $('.b-current .bshift-editor').show();
     });
 
-    $(document).on('click','#new_slide',function(e) {
+    $(document).on('click','.add_new_slide',function(e) {
         $(this).hide();
         $('#slides ul li').hide();
         var pid = $(this).attr('data-pid');
