@@ -9,7 +9,8 @@
 
 	
 	if(isset($_POST['update'])) {
-	
+		
+		
 	  	if($_POST) { 
 	  			$post_id = $_POST['slider_id']; 
 	  	}
@@ -22,6 +23,9 @@
 	  	update_post_meta($post_id,'Slider_Effect',$_POST['effect']);
 	  	update_post_meta($post_id,'Slider_Bgcolor',$_POST['bgcolor']);
 	  	update_post_meta($post_id,'Slider_Width_Metric',$_POST['width_metric']);
+	  	if (isset($_POST['autoplay'])) {
+	  		update_post_meta($post_id,'Slider_Play',$_POST['autoplay']);
+	  	}
 	  	update_post_meta($post_id,'Slider_Height_Metric',$_POST['height_metric']);
 	
 	}
@@ -139,7 +143,8 @@
 				<h4>Background Color</h4><input type="text" class="jscolor" name="bgcolor" value="<?php echo get_post_meta($post_id,'Slider_Bgcolor',true); ?>"></br>
 				<input type="hidden" name="update"></input>
 				<h4>Autoplay True</h4>
-				<input type="radio" name="autoplay"></input></br>
+				<?php $autoplay = get_post_meta($post_id,'Slider_Play',true); ?>
+				<input type="checkbox" name="autoplay" value="true" <?php if($autoplay=='true') { echo "checked"; } ?>></input></br>
 				<input type="submit" value="update slider" class="update_slider"></input>
 				<input type="hidden" name="slider_id" value="<?php echo $post_id; ?>">
 			</div>
@@ -274,7 +279,7 @@
 							</li>
 						<?php } ?>
 			<?php endif; ?>
-			<li style="display: inline-block; vertical-align: top;"><h2 class="slide_title add_new_slide"> + </h2> </li>
+			<li style="display: inline-block; vertical-align: top;"><h2 class="add_new_slide" data-pid="<?php echo $post_id; ?>"> + </h2> </li>
 			</ul>
 			<input type="hidden" name="save_slides" data-slide-staus="" />
 			<input type="submit" value="save/edit" class="btn_save"/>

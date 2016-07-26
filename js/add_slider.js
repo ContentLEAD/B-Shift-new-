@@ -71,6 +71,11 @@ jQuery(document).ready(function($){
         }
    });
 
+   $('.ih').on('keyup', function() {
+        
+        console.log('jQuery suxx!!');
+   });
+
    $('#slide_width').keyup(function() {
 
         var prev_width = $(this).val();
@@ -96,7 +101,7 @@ jQuery(document).ready(function($){
     });
 
     function dynamicText(a) {
-        $('.slide-preview div div').html(a);
+        $('.slide-preview div div div.option-a').html(a);
         var dynamic_height = $('input[name="height"]').val();
         $('.inner_prev').css('height',dynamic_height);
     }
@@ -115,8 +120,8 @@ jQuery(document).ready(function($){
             slides_length = reta.lid;
         });
 
-	$('.slide_input').mousedown(function() {
-    	$('.btn_save').show();
+    $('.slide_input').mousedown(function() {
+        $('.btn_save').show();
     });
 
     $('textarea').mousedown(function() {
@@ -189,6 +194,7 @@ jQuery(document).ready(function($){
             var slides_length = ret.lid;
             var dynamic_box =  ret.cid;
             console.log(dynamic_box);
+            console.log(ret);
             //console.log(ret);
             //$('.btn_save').after(dynamic_box);
             var slides = $('#slides').find('.ib');
@@ -214,7 +220,7 @@ jQuery(document).ready(function($){
             //$('.bshift-editor').attr('id','slide_editor');
             $(".b-current h4[class='slide_content_label']").attr('id',slides_length);
             $('.delete_slide').css('margin-top','0px');
-            $('.slide-preview').css({'height': height, 'bottom' : '700px'});
+            $('.slide-preview').css({'height': height+'px', 'bottom' : '700px'});
             
             //$(".slide_label").after(dynamic_box); // loading wp_editor function via output buffer in ajax call
             //console.log(tinyMCE);
@@ -227,7 +233,7 @@ jQuery(document).ready(function($){
         var inp = document.createElement('INPUT');
         var picker = new jscolor(inp);
         picker.fromHSV();
-        $('.btn_save').before('<div class="b-current"><h4 class="slide_label">Content</h4><textarea hidden="false" class="bshift-editor wp-editor-area" style="height: 182px;" autocomplete="off" cols="40" name="slide_content[]"></textarea><h4 style="display:inline">Image Height</h4><input type="text" name="image_height[]" class="slide_input ih" ></input></br><h4 style="display:inline">Image Position</h4><select name="image_position[]" class=""><option value="relative" >Relative</option><option value="absolute" >Absolute</option></select></br><input id="inner-image-url" class="slide_input image_url" name="image_upload[]" type="text"></input><input class="upload_image_button" value="Add Image" data-target="slide-button-preview" type="button"></input><h4 id="color_label">Content Color</h4><h4>Width</h4><input type="text" name="width[]" class="slide_width" value="" ></input><br><select name="width_metric[]" class="slide_width_metric"><option value="px" class="slide_width_metric_px" selected="">Pixels</option><option value="%" class="slide_width_metric_pc" selected="">Percent</option></select></br><!--<h4>Height</h4><input type="text" name="height[]" class="slide_height" value="" ></input>--><h4>Delay</h4><input type="text" name="delay[]" value="" class="slide_delay" ></input><h4>Effect</h4><select name="effect[]" class="slide_effect"><option value="fader">Fade</option><option value="slide_vertical">Slide Vertical</option><option value="slide_left">Slide Left</option><option value="slide_right">Slide Right</option><option value="toggle">Standard Toggle</option></select><h4>Index</h4><input type="text" name="index[]" class="slide_index"></input><input id="image_url" class="slide_input image_url" name="slide_upload[]" value="" type="text"></input><input class="upload_image_button" value="Add Background" data-target="brafton-end-button-preview" type="button"></input><img src="../wp-content/plugins/B-Shift//img/delete-512.png" data-ref="0" class="delete_slide" title="Delete this slide."/><div class="slide-preview"><div class="inner_prev"><div><div class="option-a"></div><div class="option-b"><img src="" id="inner-image" /></div></div></div><input type="hidden" name="counter[]"></input></div>');
+        $('.btn_save').before('<div class="b-current"><div class="slide-preview"><div class="inner_prev"><div style="position: relative; top: 50%; transform: translateY(-50%);"><div class="option-a"></div><div class="option-b"><!--<img src="" id="inner-image" />--></div></div></div></div><h4 class="slide_label">Content</h4><textarea hidden="false" class="bshift-editor wp-editor-area" style="height: 182px;" autocomplete="off" cols="40" name="slide_content[]"></textarea><div class="bshift-form-element"><input id="image_url" class="slide_input image_url" name="slide_upload[]" value="" type="text"></input><input class="upload_image_button" value="Add Background" data-target="brafton-end-button-preview" type="button"></input></br></div><!--<h4 style="display:inline">Image Height</h4><input type="text" name="image_height[]" class="slide_input ih" ></input></br><h4 style="display:inline">Image Position</h4><select name="image_position[]" class="ip"><option value="center" >Center</option><option value="left" >Left</option><option value="right" >Right</option></select></br><input id="inner-image-url" class="slide_input image_url" name="image_upload[]" type="text"></input><input class="upload_image_button" value="Add Image" data-target="slide-button-preview" type="button"></input>--><div class="bshift-form-element"><h4 id="color_label">Content Color</h4></div><div class="bshift-form-element"><h4>Width</h4><input type="text" name="width[]" class="slide_width" value="" ></input><br><select name="width_metric[]" class="slide_width_metric"><option value="px" class="slide_width_metric_px" selected="">Pixels</option><option value="%" class="slide_width_metric_pc" selected="">Percent</option></select></br></div><div class="bshift-form-element"><h4>Delay</h4><input type="text" name="delay[]" value="" class="slide_delay" ></input></div><div class="bshift-form-element"><h4>Effect</h4><select name="effect[]" class="slide_effect"><option value="fader">Fade</option><option value="slide_vertical">Slide Vertical</option><option value="slide_left">Slide Left</option><option value="slide_right">Slide Right</option><option value="toggle">Standard Toggle</option></select></div><div class="bshift-form-element"><h4>Index</h4><input type="text" name="index[]" class="slide_index" style="display: block;"></input></div><img src="../wp-content/plugins/B-Shift-new/img/delete-512.png" data-ref="0" class="delete_slide" title="Delete this slide."/><input type="hidden" name="counter[]"></input></div>');
         document.getElementById('color_label').appendChild(inp);
 
         b = document.getElementById("color_label");

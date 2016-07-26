@@ -124,6 +124,7 @@ register_post_type( 'b-shift-slider',
 }
 
 function create_slider() {
+
 		global $post;
             $slides = array(array());
         	$title=$_POST['slider_title'];
@@ -135,7 +136,7 @@ function create_slider() {
             $bgcolor=$_POST['bgcolor'];
             $height_metric=$_POST['height_metric'];
             $width_metric=$_POST['width_metric'];
-            $autoplay =$_POST['autoplay'];
+            if(isset($_POST)) { $autoplay =$_POST['autoplay']; }
 		    $vars = array(
     			'post_type'=>'b-shift-slider',
     			'post_title'=> $title,
@@ -155,6 +156,7 @@ function create_slider() {
         add_post_meta($post,'Slider_Bgcolor',$bgcolor);
         add_post_meta($post,'Slider_Play',$autoplay);
         add_post_meta($post,'Slider_Width_Metric',$width_metric);
+
 
 }
 add_action('wp_ajax_bshift_action_two', 'bshift_second_callback');

@@ -211,3 +211,8 @@ html {
 	margin-top: 5%;
 	margin-left: 3px;
 }
+.entry-form .checkbox {
+	margin-top: 0px;
+	vertical-align: text-bottom;
+	margin-left: 5px;
+}

@@ -2,7 +2,7 @@
 
 ?>
 <h1>General Settings Page</h1>
-<form action="" method="post">
+<form action="" method="post" class="entry-form">
 	<h4>Title</h4><input type="text" name="slider_title"></br>
 	<h4>Delay</h4><input type="text" name="delay"></br>
 	<h4>State</h4>
@@ -32,7 +32,7 @@
 		<option value="rotate">Invert</option>
 	</select></br>
 	<h4 style="display:inline-block;">Autoplay True</h4>
-	<input type="radio" name="autoplay"></input>
+	<input type="checkbox" name="autoplay" value="true" class="checkbox"></input>
 	<input type="hidden" name="add_new_slider" value="1"></br>
 	<input type="submit" name="" value="Create"></br>
 </form>
