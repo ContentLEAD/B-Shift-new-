@@ -183,9 +183,9 @@
 														?>
 													</div>
 													<div class="option-b" style="float: <?php echo $new_array['image_position'][$i]; ?>; bottom: <?php $new_array['position_bottom'][$i]; ?> %;">
-														<?php if($new_array['image_height'][$i]>0) { ?>
-															<img src="<?php	echo $new_array['image_upload'][$i]; ?>" id="inner-image" height="<?php	echo $new_array['image_height'][$i]; ?>" width="auto" style="display: <?php if($new_array['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
-														<?php } ?>
+														
+															<img src="<?php	echo $new_array['image_upload'][$i]? $new_array['image_upload'][$i] : '' ?>" class="inner-image <?php echo $i; ?>" height="<?php echo $new_array['image_height'][$i]; ?>" width="auto"/>
+														
 													</div>	
 												</div>
 											</div>
@@ -227,8 +227,8 @@
 									<input type="text" name="position_bottom[]" class="slide_input btm" value="<?php echo ($new_array['position_bottom'][$i])? $new_array['position_bottom'][$i] : 0;  ?>"></input>%</br>
 									</div>
 									<div class="bshift-form-element">
-									<input class="slide_input image_url" id="inner-image-url" name="image_upload[]" value="<?php echo $new_array['image_upload'][$i]; ?>" type="text"></input>
-									<input class="upload_image_button" value="Add Image" data-target="slide-button-preview" type="button"></input>
+									<input class="slide_input image_url <?php echo $i; ?>" name="image_upload[]" value="<?php echo $new_array['image_upload'][$i]; ?>" type="text"></input>
+									<input class="upload_image_button" value="Add Image" data-id="<?php echo $i; ?>" data-target="slide-button-preview" type="button"></input>
 									</div>
 									<div class="bshift-form-element">
 									<h4>Content Color</h4><input type="text" class="jscolor slide_input" name="color[]" value=<?php echo $new_array['color'][$i];?>></br>

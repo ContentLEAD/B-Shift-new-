@@ -1237,7 +1237,7 @@
     };
 
     Slick.prototype.init = function(creation) {
-
+        console.log('creation'+creation);
         var _ = this;
 
         if (!$(_.$slider).hasClass('slick-initialized')) {

@@ -89,9 +89,9 @@
                                     jQuery(currentSlide).slideToggle(duration,function(){jQuery(this).removeClass('b-active');});
                                     break;
                                 case 'slide_right':
-                                    jQuery(currentSlide).hide('fast');
-                                    jQuery(nextSlide).css({'display':'inline','right': '2000px'});
-                                    jQuery(nextSlide).animate({"right" : "0px"},50,function(){jQuery(this).addClass('b-active');});
+                                    jQuery(currentSlide).hide('slow');
+                                    jQuery(nextSlide).css({'display':'inline','right': '1000px'});
+                                    jQuery(nextSlide).animate({"right" : "0px"},550,function(){jQuery(this).addClass('b-active');});
                                     
                                     break;
                                 case 'slide_left':

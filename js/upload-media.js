@@ -1,29 +1,3 @@
-/*jQuery(document).ready(function($) {
-    $(document).on("click", ".upload_image_button", function() {
-
-        jQuery.data(document.body, 'prevElement', $(this).prev());
-        jQuery.data(document.body, 'nextElement', $(this).next());
-        jQuery.data(document.body, 'previewImage', $(this).attr('data-target'));
-        window.send_to_editor = function(html) {
-            var imgurl = jQuery('img',html).attr('src');
-            var inputText = jQuery.data(document.body, 'prevElement');
-            var showImage = jQuery.data(document.body, 'nextElement');
-            
-            if(inputText != undefined && inputText != '')
-            {
-                inputText.val(imgurl);
-                showImage.attr('src', imgurl);
-            }
-
-            tb_remove();
-        };
-
-        tb_show('Insert Image', 'media-upload.php?type=image&TB_iframe=true', false);
-
-        return false;
-    });
-});*/
-
 jQuery(document).ready(function($){
     $(document).on('click','.upload_image_button',function(e) {
         jQuery.data(document.body, 'prevElement', $(this).prev());
@@ -55,12 +29,8 @@ jQuery(document).ready(function($){
             if(inputText != undefined && inputText != '')
             {
                 inputText.val(image_url);
-                $('.much_hate').css({'background-image': 'url('+image_url+')', 'background-size': 'cover', 'background-position': '0px center'});
-                if(showImage.hasClass('pumpkin_widget')){
-                    showImage.attr('src', image_url);
-                }else{
-                    imgPreview.attr('src', image_url);
-                }
+                //$('.much_hate').css({'background-image': 'url('+image_url+')', 'background-size': 'cover', 'background-position': '0px center'});
+                imgPreview.attr('src', image_url);
                 
             }
             inner_img_url=$('#inner-image-url').val();

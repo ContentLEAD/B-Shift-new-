@@ -14,7 +14,7 @@ jQuery(document).ready(function($){
                             mode: _mode,
                             selector : ".bshift-editor",
                             browser_spellcheck : true,
-                            valid_elements : 'h1,h2,h3,h4,h5,ul,div,br,a[href]',
+                            valid_elements : 'h1,h2,h3,h4,h5,ul,div,br,a[href],em,strong',
                             menubar : false,
                             plugins: ['code  anchor fullscreen'],
                             resize: 'both',
@@ -23,13 +23,14 @@ jQuery(document).ready(function($){
                             setup: function(editor) {
                                 editor.on('keyup', function(editor){
                                     var mce = $('#tinymce');
-                                    var latest = tinyMCE.activeEditor.getContent({format : 'raw'});
-                                    //console.log(latest);
+                                    var latest = tinyMCE.activeEditor.getContent({format : 'html'});
+                                    console.log(latest);
                                     dynamicText(latest);
                                     });
                                 editor.on('change', function(editor){
                                     var mce = $('#tinymce');
-                                    var latest = tinyMCE.activeEditor.getContent({format : 'raw'});
+                                    var latest = tinyMCE.activeEditor.getContent({format : 'html'});
+                                    console.log(latest);
                                     dynamicText(latest);
 
                                     });
