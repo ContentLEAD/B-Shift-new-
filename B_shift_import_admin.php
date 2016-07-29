@@ -22,7 +22,7 @@ padding: 4px; background-color: #FFF; font-weight: 600; text-decoration: none;" 
                     <?php $id = get_the_ID(); ?>
                     <div class="col-md-3"><a href="<?php echo get_home_url(); ?>/wp-admin/admin.php?page=edit_slider&slider_id=<?php the_ID(); ?>"> <?php the_title(); ?></a></div>
                     <div class="col-md-3"> <?php the_time('F jS, Y'); ?></div>
-                    <div class="col-md-3"> [bshift id="<?php the_ID(); ?>"]</div>
+                    <div class="col-md-3"> [bshift id="<?php the_ID() ?>"]</div>
                     <div class="col-md-3"><a href="<?php echo get_delete_post_link(); ?>">Delete</a></div>
                     
                 

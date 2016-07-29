@@ -224,11 +224,13 @@ function bshift_shortcode($atts) {
     ), $atts );
     $post_id =  $a['id'];
     $slides = array(array());
+    $slider_delay = get_post_meta($post_id,'Slider_Delay',true);
     $slider_title = get_post_meta($post_id,'Slider_Name',true);
     $slider_state = get_post_meta($post_id,'Slider_State',true);
     $slides = get_post_meta($post_id,'Slides_Array',true);
     $slide_count = get_post_meta($post_id,'Slides_Array_Count',true);
     $total_width = get_post_meta($post_id,'Slider_Width',true) . get_post_meta($post_id,'Slider_Width_Metric',true);
+    $autoplay = get_post_meta($post_id,'Slider_Play',true);
   
 
     
@@ -246,7 +248,7 @@ function bshift_shortcode($atts) {
         <?php $eff = get_post_meta($post_id,'Slider_Effect',true); if($eff == 'slide_left') { ?>
         <?php wp_deregister_script('bshift-js'); ?>
 
-        <div class="left-bframe" data-pid="<?php echo $post_id; ?>" style="height: <?php echo get_post_meta($post_id,'Slider_Height',true); echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>">
+        <div class="left-bframe" data-speed="<?php echo $slider_delay; ?>" data-autoplay="<?php echo $autoplay; ?>" data-pid="<?php echo $post_id; ?>" style="height: <?php echo get_post_meta($post_id,'Slider_Height',true); echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>">
             <?php for($i=0;$i<$slide_count;$i++) {  if($slider_state == 'published'){ ?>
             <div id="<?php echo $post_id; ?>" class="bslide <?php echo $post_id .' '.$slides['effect'][$i] ?>" data-index = "<?php echo $slides['index'][$i]; ?>" data-speed="<?php echo $slides['delay'][$i]; ?>" data-effect="<?php echo $slides['effect'][$i]; ?>" style="background-image: url('<?php echo $slides['slide_upload'][$i]; ?>'); 
                 background-size:cover; width: <?php echo $slides['width'][$i]; echo $slides['width_metric'][$i]; ?>; height: 100%; background-position: 0, <?php echo $total_width; ?>;  ">
@@ -256,16 +258,18 @@ function bshift_shortcode($atts) {
                     <div class="option-a" style="float: <?php echo $slides['text_position'][$i]; ?>">
                     <?php echo html_entity_decode($slides['slide_content'][$i]); ?>
                     </div>
+                    <?php if($slides['image_height'][$i]>0) { ?>
                     <div class="option-b" style="float: <?php echo $slides['image_position'][$i]; ?>; bottom: <?php $slides['position_bottom'][$i]; ?> %;">
                         <img src="<?php echo $slides['image_upload'][$i]; ?>" id="inner-image" style="height: <?php echo $slides['image_height'][$i]; ?>px; display: <?php if($slides['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
             <?php } } ?>
         </div>
         <?php } else { ?>
         <div class="b-outer-frame">
-        <ul class="b-frame normal-slider fullwidth-slider" style="background-color: #000; height: <?php echo get_post_meta($post_id,'Slider_Height',true); echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>; width: <?php echo get_post_meta($post_id,'Slider_Width',true); echo get_post_meta($post_id,'Slider_Width_Metric',true); ?>;">
+        <ul class="b-frame normal-slider fullwidth-slider" data-autoplay="<?php echo $autoplay; ?>" style="background-color: #000; height: <?php echo get_post_meta($post_id,'Slider_Height',true); echo get_post_meta($post_id,'Slider_Height_Metric',true); ?>; width: <?php echo get_post_meta($post_id,'Slider_Width',true); echo get_post_meta($post_id,'Slider_Width_Metric',true); ?>;">
 
             <!-- Each li should have the animation specified not the ul -->
             <?php /*foreach($slides as $slide){ if($slide['state']=='published'){ */?>
@@ -278,9 +282,14 @@ function bshift_shortcode($atts) {
                     <!-- need to start setting some basic constraitns on the elements to ensure they always render as good as possible under minimal settings. -->
                     <span class="slide-nav-left" data-direction="left"></span>
                     <span class="slide-nav-right" data-direction="right"></span>                    
-                    
-                    <?php echo html_entity_decode($slides['slide_content'][$i]); ?>
-
+                    <div class="option-a" style="float: <?php echo $slides['text_position'][$i]; ?>">
+                        <?php echo html_entity_decode($slides['slide_content'][$i]); ?>
+                    </div>
+                    <?php if($slides['image_height'][$i]>0) { ?>
+                    <div class="option-b" style="float: <?php echo $slides['image_position'][$i]; ?>; bottom: <?php $slides['position_bottom'][$i]; ?> %;">
+                        <img src="<?php echo $slides['image_upload'][$i]; ?>" id="inner-image" style="height: <?php echo $slides['image_height'][$i]; ?>px; display: <?php if($slides['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
+                    </div>
+                    <?php } ?>
 
 
 

@@ -96,11 +96,7 @@
                                     break;
                                 case 'slide_left':
                                     jQuery('.left-bframe').slick({
-                                        slidesToShow: 1,
-                                        slidesToScroll: 1,
-                                        autoplay: true,
-                                        arrows: true,
-                                        autoplaySpeed: 4000                                
+                                        
                                     });
                                     /*jQuery(nextSlide).css({'display':'inline','left': '2000px'});
                                     jQuery(currentSlide).animate({'left' : '-100%'},500,function(){
@@ -182,11 +178,13 @@
                         if(current_slides_index==slidesLength) {
                             current_slides_index = 0;
                         }
-                        bshiftcontroller = setTimeout(function(){
+                        var autoplay = $('.b-frame').attr('data-autoplay');
+                        if(autoplay=='true') {
+                            bshiftcontroller = setTimeout(function(){
                             slid.bshift(current_slides_index)
                             },
                             jQuery(slid[current_slides_index]).attr('data-speed'));
-                        
+                        }
                     }                    
                         
                 });
@@ -212,12 +210,15 @@
             var span_top_margin = (slider_height-span_left_height)/2;
             $('.slide-nav-left').css('top', span_top_margin+'px');
             $('.slide-nav-right').css('top', span_top_margin+'px');
+            var autoplay = $('.b-frame').attr('data-autoplay');
             i = 0;
             index = 0;
             slides = $('.b-frame').find('li');
             slidesLength = slides.length;
             var a = 0;
             $('.b-shift-content span').click(function(){ dir = $(this).attr('data-direction'); $(this).bclick(dir)});
-            bshiftcontroller = setTimeout(function(){slides.bshift(0)},$(slides[0]).attr('data-speed')); 
+            if(autoplay=='true') {
+                bshiftcontroller = setTimeout(function(){slides.bshift(0)},$(slides[0]).attr('data-speed')); 
+            }
         });
 

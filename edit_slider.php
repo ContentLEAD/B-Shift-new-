@@ -10,7 +10,7 @@
 	
 	if(isset($_POST['update'])) {
 		
-		
+		var_dump($_POST);
 	  	if($_POST) { 
 	  			$post_id = $_POST['slider_id']; 
 	  	}
@@ -25,6 +25,8 @@
 	  	update_post_meta($post_id,'Slider_Width_Metric',$_POST['width_metric']);
 	  	if (isset($_POST['autoplay'])) {
 	  		update_post_meta($post_id,'Slider_Play',$_POST['autoplay']);
+	  	} else {
+	  		update_post_meta($post_id,'Slider_Play','false');
 	  	}
 	  	update_post_meta($post_id,'Slider_Height_Metric',$_POST['height_metric']);
 	
@@ -181,7 +183,9 @@
 														?>
 													</div>
 													<div class="option-b" style="float: <?php echo $new_array['image_position'][$i]; ?>; bottom: <?php $new_array['position_bottom'][$i]; ?> %;">
-														<img src="<?php	echo $new_array['image_upload'][$i]; ?>" id="inner-image" height="<?php	echo $new_array['image_height'][$i]; ?>" width="auto" style="display: <?php if($new_array['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
+														<?php if($new_array['image_height'][$i]>0) { ?>
+															<img src="<?php	echo $new_array['image_upload'][$i]; ?>" id="inner-image" height="<?php	echo $new_array['image_height'][$i]; ?>" width="auto" style="display: <?php if($new_array['image_upload'][$i]) { echo 'inline'; }  else { echo 'none'; } ?>;"/>
+														<?php } ?>
 													</div>	
 												</div>
 											</div>

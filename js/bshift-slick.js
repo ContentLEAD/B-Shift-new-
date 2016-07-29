@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 	        'action': 'bshift_action_two',
 	        'id': arrow
 	        };
-    		$.post(ajaxurl, data, function(response) {
+    		/*$.post(ajaxurl, data, function(response) {
 	            console.log(response);
 	            //var reta = JSON.parse(response);
               
@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
               var color = '#'+response[ind];
               $('.slick-arrow').css('color','#'+j_array['colors'][ind]);
               //console.log(ind);
-        	});
+        	}); */
         var qid = $('.left-bframe').attr('data-pid');
            
            //console.log(button_array[0]);
@@ -42,10 +42,26 @@ jQuery(document).ready(function($) {
           'action': 'bshift_action',
           'id': qid
           };
+
+        var autoplay = Boolean($('.left-bframe').attr('data-autoplay'));
+        console.log(autoplay);
+        var _this = $('.left-bframe');
+        $(_this).slick({
+                          slidesToShow: 1,
+                          slidesToScroll: 1,
+                          autoplay: autoplay,                          
+                          //arrows: true,
+                          //appendArrows: $(".b-shift-content"), 
+                          autoplaySpeed: 1500                               
+                        });
+
+        /*
         $.post(ajaxurl, data, function(response) {
             //console.log(JSON.parse(response));
             var reta = JSON.parse(response);
             speed = reta.did;
+            var autoplay = $('.left-bframe').attr('data-autoplay');
+
             $('.left-bframe').slick({
                           slidesToShow: 1,
                           slidesToScroll: 1,
@@ -54,9 +70,10 @@ jQuery(document).ready(function($) {
                           //appendArrows: $(".b-shift-content"), 
                           autoplaySpeed: speed                                
            });
-        });
+
+        }); */
         
-        $(document).on('change','.slick-current', function() {
+        /*$(document).on('change','.slick-current', function() {
             
 
             var arrow = $('.left-bframe').attr('data-pid');
@@ -81,8 +98,10 @@ jQuery(document).ready(function($) {
                   $('.slick-arrow').css('color','#'+j_array['colors'][ind]);
                   //console.log(ind);
               });
-        });
-        //var button_array = document.getElementsByClassName('slick-arrow');
+        });*/
+        $('.slick-next').on('click', function() {
+           console.log('test'+$('.slick-active').nextElementSibling());
 
-           //$('.b-shift-content').css('color', 'orange');
+        })
+       
 });
